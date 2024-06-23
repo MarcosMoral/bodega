@@ -6,7 +6,7 @@ export const HeaderComponet = () => {
         <header>
             <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
                 <div>
-                    <a href='/'className='navbar-brand'>Bodegas Malacatones: Gestion de Vinos</a>
+                    <a href='/'className='navbar-brand'>Bodegas MarcosMoral: Gestion de Vinos</a>
                 </div>
             </nav>
         </header>

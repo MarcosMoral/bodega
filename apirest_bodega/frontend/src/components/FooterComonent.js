@@ -5,7 +5,7 @@ export const FooterComonent = () => {
     <div>
         <footer className='footer'>
             <span className='text-muted'>
-                Dont Drink and Drive (opcional)
+                Dont Drink and Drive
             </span>
         </footer>
     </div>

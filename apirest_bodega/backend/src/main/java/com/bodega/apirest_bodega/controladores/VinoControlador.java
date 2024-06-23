@@ -16,6 +16,10 @@ import java.util.List;
 public class VinoControlador {
     @Autowired
     VinoServicioImpl vinoServicio;
+
+    /*
+    *
+    * */
     @GetMapping("/vinos")
     public List<Vino> obtenerVinos(){
         return vinoServicio.ordenarTodo();

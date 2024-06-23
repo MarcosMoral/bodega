@@ -1,15 +1,23 @@
 import React, { useState } from 'react'
+import VinoService from '../sevices/VinoService';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const AddVinoComponent = () => {
     const [nombre, setNombre] = useState('');
     const [tipo, setTipo] = useState('');
     const [aniada, setAniada] = useState('');
     const [bodega, setBodega] = useState('');
+    const navigate = useNavigate();
 
     const saveVino = (e) => {
         e.preventDefault();
         const vino = { nombre, tipo, aniada, bodega };
-        console.log(vino);
+        VinoService.createVino(vino).then((response) => {
+            console.log(response.data);
+            navigate('/')
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
   return (
@@ -65,6 +73,8 @@ export const AddVinoComponent = () => {
                                     />
                             </div>
                             <button className='btn btn-success' onClick={ (e) => saveVino(e) }>Guardar</button>
+                            &nbsp;&nbsp;
+                            <Link to='/' className='btn btn-danger'>Cancelar</Link>
                         </form>
                     </div>
                 </div>
