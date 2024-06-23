@@ -12,5 +12,6 @@ CREATE TABLE Vino (
   aniada int,
   bodega VARCHAR(80)
   );
-  
+
+use clientes_empresa; 
 select * from Vino;
