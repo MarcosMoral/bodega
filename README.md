@@ -22,6 +22,6 @@ Es un prototipo fullstack de página web donde se refleje una lista de elementos
     3. Abrir el fichero de backend con path: "apirest_bodega/backend/src/main/java/com/bodega/apirest_bodega/ApirestBodegaApplication.java".
     4. Ejecutar el metodo main del fichero "ApirestBodegaApplication.java".
     5. Situarse en el diretorio frontend y en terminal ejecutar lo comando: npm start.
-    6. (En caso de error con el mandato nmp start, otorgar los permisos necesarios si así lo solicita y/o ejecutarel mandato: <br> "rm -rf node_modules" antes de ejecutar de nuevo "npm start")
+    6. (En caso de error con el mandato nmp start, otorgar los permisos necesarios si así lo solicita y/o ejecutarel mandato: "rm -rf node_modules" antes de ejecutar de nuevo "npm start")
 <br>
 <br>
