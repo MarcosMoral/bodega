@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import VinoService from '../sevices/VinoService';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export const AddVinoComponent = () => {
     const [nombre, setNombre] = useState('');
@@ -8,16 +8,48 @@ export const AddVinoComponent = () => {
     const [aniada, setAniada] = useState('');
     const [bodega, setBodega] = useState('');
     const navigate = useNavigate();
+    const {id} = useParams();
 
-    const saveVino = (e) => {
+    const saveOrUpdateVino = (e) => {
         e.preventDefault();
         const vino = { nombre, tipo, aniada, bodega };
-        VinoService.createVino(vino).then((response) => {
-            console.log(response.data);
-            navigate('/')
+
+        if(id){
+            VinoService.updateVino(id,vino).then((response) => {
+                console.log(response.data);
+                navigate('/')
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+        else{
+            VinoService.createVino(vino).then((response) => {
+                console.log(response.data);
+                navigate('/')
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+    }
+
+    useEffect(() => {
+        VinoService.getVinoById(id).then((response) => {
+            setNombre(response.data.nombre);
+            setTipo(response.data.tipo);
+            setAniada(response.data.aniada);
+            setBodega(response.data.bodega);
         }).catch(error => {
             console.log(error);
         })
+    },[])
+
+    const title = () => {
+        if (id){
+            return <h2 className='text-center'>Actualizar Vino</h2>;
+        }
+        else{
+            return <h2 className='text-center'>Registro de Vinitos</h2>;
+        }
     }
 
   return (
@@ -25,7 +57,11 @@ export const AddVinoComponent = () => {
         <div className='container'>
             <div className='row'>
                 <div className='card col-md-6 offset-md-3 offset-md-3'>
-                    <h2 className='text-center'>Registro de Vinitos</h2>
+                    <h2 className='text-center'>
+                        {
+                            title()
+                        }
+                    </h2>
                     <div className='card-body'>
                         <form>
                             <div className='form-group mb-2'>
@@ -72,7 +108,7 @@ export const AddVinoComponent = () => {
                                     onChange={ (e) => setBodega(e.target.value) }
                                     />
                             </div>
-                            <button className='btn btn-success' onClick={ (e) => saveVino(e) }>Guardar</button>
+                            <button className='btn btn-success' onClick={ (e) => saveOrUpdateVino(e) }>Guardar</button>
                             &nbsp;&nbsp;
                             <Link to='/' className='btn btn-danger'>Cancelar</Link>
                         </form>

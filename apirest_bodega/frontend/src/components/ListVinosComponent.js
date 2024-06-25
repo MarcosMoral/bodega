@@ -7,13 +7,25 @@ export const ListVinosComponent = () => {
     const [vinos,setvinos] = useState([]);
 
     useEffect(() => {
+        listarVinos()
+    },[])
+
+    const listarVinos = () => {
         VinoService.getAllVinos().then(response => {
             setvinos(response.data);
             console.log(response.data);
         }).catch(error => {
             console.log(error);
         })
-    },[])
+    }
+
+    const deleteVino = (vinoId) => {
+        VinoService.deleteVino(vinoId).then((response) => {
+            listarVinos();
+        }).catch(error => {
+            console.log(error);
+        })
+    }
 
 return (
     <div className='container'>
@@ -26,6 +38,7 @@ return (
                 <th>Tipo</th>
                 <th>Añada</th>
                 <th>Bodega</th>
+                <th>Acciones</th>
             </thead>
             <tbody>
                 {
@@ -37,6 +50,10 @@ return (
                             <td>{ vino.tipo }</td>
                             <td>{ vino.aniada }</td>
                             <td>{ vino.bodega }</td>
+                            <td>
+                                <Link className='btn btn-success' to={ `/edit-vino/${vino.id}` }>Actualizar</Link>
+                                <button style={{ marginLeft:"10px" }} className='btn btn-danger' onClick={() => deleteVino(vino.id)}>Eliminar</button>
+                            </td>
                         </tr>
                     )
                 }
